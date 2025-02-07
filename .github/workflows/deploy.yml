@@ -23,8 +23,11 @@ jobs:
       - uses: actions/checkout@v2
         name: Checkout Repository
 
-      - name: Verify assumed role
-        run: aws sts get-caller-identity
+      - name: Debug IAM Role and AWS Region
+        run: |
+          echo "IAM Role ARN: ${{ secrets.IAMROLE_GITHUB }}"
+          echo "AWS Region: ${{ env.AWS_REGION }}"
+      
 
       - uses: aws-actions/configure-aws-credentials@v1
         with:
