@@ -251,21 +251,21 @@ Resources:
           ClientIdList:
             - "sts.amazonaws.com"
           ThumbprintList:
-             - !Ref ThumbprintList 
+            - !Ref ThumbprintList 
   GitHubIAMRole:
       Type: AWS::IAM::Role
       Properties:
           Path: "/"
           RoleName: CodeDeployRoleforGitHub
           AssumeRolePolicyDocument:
-             Statement:
-               - Effect: Allow
-                 Action: sts:AssumeRoleWithWebIdentity
-                 Principal:
-                   Federated: !Ref IDCProvider
-                 Condition:
-                   StringLike:
-                     token.actions.githubusercontent.com:sub: !Sub repo:${GithubRepoName}:*
+            Statement:
+              - Effect: Allow
+                Action: sts:AssumeRoleWithWebIdentity
+                Principal:
+                  Federated: !Ref IDCProvider
+                Condition:
+                  StringLike:
+                    token.actions.githubusercontent.com:sub: !Sub repo:${GithubRepoName}:*
           MaxSessionDuration: 3600
           Description: "Github Actions role"
           Policies:

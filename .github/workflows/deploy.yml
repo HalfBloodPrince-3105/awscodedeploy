@@ -28,7 +28,7 @@ jobs:
           echo "IAM Role ARN: ${{ secrets.IAMROLE_GITHUB }}"
           echo "AWS Region: ${{ env.AWS_REGION }}"
 
-      - uses: aws-actions/configure-aws-credentials@v1
+      - uses: aws-actions/configure-aws-credentials@v2
         with:
           role-to-assume: ${{ secrets.IAMROLE_GITHUB }}
           role-session-name: GitHub-Action-Role
