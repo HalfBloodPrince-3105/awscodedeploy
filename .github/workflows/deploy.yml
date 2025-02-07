@@ -9,7 +9,7 @@ on:
 env:
   applicationfolder: spring-boot-hello-world-example
   AWS_REGION: us-east-1
-  S3BUCKET: borda-stack-webappdeploymentbucket-0xavrjrynq5h
+  S3BUCKET: borda-stack001-webappdeploymentbucket-v7c4mvka7xmw
 
 
 jobs:
@@ -27,7 +27,6 @@ jobs:
         run: |
           echo "IAM Role ARN: ${{ secrets.IAMROLE_GITHUB }}"
           echo "AWS Region: ${{ env.AWS_REGION }}"
-      
 
       - uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -73,4 +72,3 @@ jobs:
         echo "Deploying branch ${{ env.GITHUB_REF }} to ${{ github.event.inputs.environment }}"
         commit_hash=`git rev-parse HEAD`
         aws deploy create-deployment --application-name CodeDeployAppNameWithASG --deployment-group-name CodeDeployGroupName --github-location repository=$GITHUB_REPOSITORY,commitId=$commit_hash --ignore-application-stop-failures
-        
