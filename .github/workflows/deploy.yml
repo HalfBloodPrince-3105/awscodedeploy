@@ -28,6 +28,15 @@ jobs:
           echo "IAM Role ARN: ${{ secrets.IAMROLE_GITHUB }}"
           echo "AWS Region: ${{ env.AWS_REGION }}"
 
+      - name: Inspect GitHub OIDC Token
+        run: |
+          echo "Requesting token..."
+          curl -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" $ACTIONS_ID_TOKEN_REQUEST_URL
+        env:
+          ACTIONS_ID_TOKEN_REQUEST_URL: ${{ secrets.ACTIONS_ID_TOKEN_REQUEST_URL }}
+          ACTIONS_ID_TOKEN_REQUEST_TOKEN: ${{ secrets.ACTIONS_ID_TOKEN_REQUEST_TOKEN }}
+        
+
       - uses: aws-actions/configure-aws-credentials@v2
         with:
           role-to-assume: ${{ secrets.IAMROLE_GITHUB }}
